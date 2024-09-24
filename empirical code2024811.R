@@ -1,6 +1,6 @@
 ######################################selecting dataset
 library(rtry);library(patchwork)
-daf=rtry_import("C:\\Users\\Lenovo\\Desktop\\Eco-evolutionary biomass partitioning2024.6.14\\empirical test\\35431.txt")
+daf=rtry_import("C:\\Users\\Lenovo\\Desktop\\35431.txt")
 
 DF=rtry_exclude(daf,
              (TraitID %in% NA),
@@ -31,12 +31,12 @@ all=rtry_join_left(data_selected2,traits,baseOn = ObservationID)
 ######################################
 library(ggplot2)
 library(rtry)
-df=read.csv("flowering.csv")#analyses of variation and distribution pattern (双峰型) of flowering time (total data)
-mm=sort(table(df$SpeciesName),decreasing = TRUE)#搜索指定列的频率并从高到低排序
+df=read.csv("flowering.csv")
+mm=sort(table(df$SpeciesName),decreasing = TRUE)#
 df2=rtry_select_row(df,
                     (SpeciesName %in% c("Brassica tournefortii")),
                     getAncillary = TRUE)
-# 将OrigValueStr列转换为因子，并指定其水平（类别）
+
 df2$OrigValueStr <- as.factor(df2$OrigValueStr)
 freq=table(df2$OrigValueStr)
 df3=data.frame(freq=freq,NUM=1:length(freq))
@@ -96,7 +96,7 @@ figempB=ggplot(df, aes(x="", y=value,fill=category)) +  geom_bar(stat="identity"
                                   margin = margin(b = -0.0, t = 0.4, l = 0, unit = "cm")),
         plot.margin = margin(t=0.2, r=0.3, b=0.2, l=0.12, "cm") )
 #####################
-df=read.csv("gr2.csv")# analyses about the relationship of biomass vs. onset of flowering; distribution pattern (双峰型) of flowering time (part data)
+df=read.csv("gr2.csv")# analyses about the relationship of biomass vs. onset of flowering; 
 df2=rtry_select_row(df,
                     (SpeciesName %in% c("Plantago lanceolata","Dactylis glomerata","Trifolium pratense",
                                         "Anthoxanthum odoratum","Ranunculus acris")),
@@ -172,7 +172,7 @@ figempD=ggplot()+
 df2=rtry_select_row(df,
                     (SpeciesName %in% c("Plantago lanceolata")),
                     getAncillary = TRUE)
-# 将Onsetflower列转换为因子，并指定其水平（类别）
+
 df2$Onsetflower <- as.factor(df2$Onsetflower)
 freq=table(df2$Onsetflower)
 df3=data.frame(freq=freq,NUM=1:length(freq))
@@ -206,7 +206,7 @@ figempS1A=ggplot(df2, aes(x=Onsetflower)) + geom_bar(fill="steelblue")+
 df2=rtry_select_row(df,
                     (SpeciesName %in% c("Dactylis glomerata")),
                     getAncillary = TRUE)
-# 将Onsetflower列转换为因子，并指定其水平（类别）
+
 df2$Onsetflower <- as.factor(df2$Onsetflower)
 freq=table(df2$Onsetflower)
 df3=data.frame(freq=freq,NUM=1:length(freq))
@@ -240,7 +240,7 @@ figempS1B=ggplot(df2, aes(x=Onsetflower)) + geom_bar(fill="steelblue")+
 df2=rtry_select_row(df,
                     (SpeciesName %in% c("Trifolium pratense")),
                     getAncillary = TRUE)
-# 将Onsetflower列转换为因子，并指定其水平（类别）
+
 df2$Onsetflower <- as.factor(df2$Onsetflower)
 freq=table(df2$Onsetflower)
 df3=data.frame(freq=freq,NUM=1:length(freq))
@@ -274,7 +274,7 @@ figempS1C=ggplot(df2, aes(x=Onsetflower)) + geom_bar(fill="steelblue")+
 df2=rtry_select_row(df,
                     (SpeciesName %in% c("Anthoxanthum odoratum")),
                     getAncillary = TRUE)
-# 将Onsetflower列转换为因子，并指定其水平（类别）
+
 df2$Onsetflower <- as.factor(df2$Onsetflower)
 freq=table(df2$Onsetflower)
 df3=data.frame(freq=freq,NUM=1:length(freq))
@@ -307,7 +307,7 @@ figempS1D=ggplot(df2, aes(x=Onsetflower)) + geom_bar(fill="steelblue")+
 df2=rtry_select_row(df,
                     (SpeciesName %in% c("Ranunculus acris")),
                     getAncillary = TRUE)
-# 将Onsetflower列转换为因子，并指定其水平（类别）
+
 df2$Onsetflower <- as.factor(df2$Onsetflower)
 freq=table(df2$Onsetflower)
 df3=data.frame(freq=freq,NUM=1:length(freq))
@@ -342,7 +342,7 @@ figempS1E=ggplot(df2, aes(x=Onsetflower)) + geom_bar(fill="steelblue")+
 df2=rtry_select_row(df,
                     (Genus %in% c("Carex")),
                     getAncillary = TRUE)
-# 将Onsetflower列转换为因子，并指定其水平（类别）
+
 df2$Onsetflower <- as.factor(df2$Onsetflower)
 freq=table(df2$Onsetflower)
 df3=data.frame(freq=freq,NUM=1:length(freq))
@@ -374,7 +374,7 @@ figempS2A=ggplot(df2, aes(x=Onsetflower)) + geom_bar(fill="steelblue")+
 
 #########
 meanAGBmax=aggregate(df2$AGBmax,by=list(type=df2$Onsetflower),mean)
-meanAGBmax=meanAGBmax[complete.cases(meanAGBmax),]#去掉包含NA的行
+meanAGBmax=meanAGBmax[complete.cases(meanAGBmax),]#
 bioup=Onflowerup=biodwn=Onflowerdwn=NA;j=k=1
 for (i in 1:length(meanAGBmax$type)){
   if(meanAGBmax$x[i]>=200){bioup[j]=meanAGBmax$x[i];Onflowerup[j]=meanAGBmax$type[i];j=j+1}
